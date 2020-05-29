@@ -13,3 +13,6 @@ access.log
 
 # node modules
 node_modules
+
+#vscode folde
+.vscode

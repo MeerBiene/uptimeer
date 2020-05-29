@@ -48,7 +48,7 @@ function dbget() {
 
 function discordupdate() {
 
-    
+    if (!config.discordmodule.enabled) return
 
 }
 

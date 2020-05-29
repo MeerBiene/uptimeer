@@ -21,8 +21,9 @@ A small uptime backend server, that tracks and stores up and downtimes of your s
         "anotherserver": {
             "displayname": "Bar",
             "desc": "This is another example server.",
-            "IP": "127.0.0.1:4000",
-            "type": "MC"
+            "IP": "pixliesearth.eu",
+            "type": "MC", 
+            "port": 25565 // port option only valid for minecraft servers
         }
     },
     "redisconfig": {
