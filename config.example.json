@@ -1,0 +1,23 @@
+{
+    "port": "3000",
+    "indexroute": "/uptime",
+    "mode": "light",
+    "interval": "30", 
+    "logging": false,
+    "servers": {
+        "exampleserver": {
+            "displayname": "Foo",
+            "desc": "This is an example server.",
+            "IP": "127.0.0.1"
+        },
+        "anotherserver": {
+            "displayname": "Bar",
+            "desc": "This is another example server.",
+            "IP": "127.0.0.1:4000"
+        }
+    },
+    "redisconfig": {
+        "PORT": "3367",
+        "PASSWORD": "something"
+    }
+}

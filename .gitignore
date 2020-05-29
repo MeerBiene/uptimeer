@@ -1,0 +1,15 @@
+# config files, referr to the according .example files
+config.json
+discordconfig.json
+
+#databases
+cache.sqlite
+data.sqlite
+data.sqlite-shm
+data.sqlite-wal
+
+# log file
+access.log
+
+# node modules
+node_modules
