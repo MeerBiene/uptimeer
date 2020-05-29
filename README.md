@@ -1,4 +1,4 @@
-# Utpimeer™
+# Uptimeer™
 A small uptime backend server, that tracks and stores up and downtimes of your server(s).
 
 ## Config:
@@ -9,18 +9,20 @@ A small uptime backend server, that tracks and stores up and downtimes of your s
     "port": "3000",
     "indexroute": "/uptime",
     "mode": "light",
-    "interval": "30", 
+    "interval": "30", // this is in minutes, enter a value between 5 and 60 here.
     "logging": false,
     "servers": {
         "exampleserver": {
             "displayname": "Foo",
             "desc": "This is an example server.",
-            "IP": "127.0.0.1"
+            "IP": "127.0.0.1",
+            "type": "web"
         },
         "anotherserver": {
             "displayname": "Bar",
             "desc": "This is another example server.",
-            "IP": "127.0.0.1:4000"
+            "IP": "127.0.0.1:4000",
+            "type": "MC"
         }
     },
     "redisconfig": {

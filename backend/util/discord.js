@@ -22,7 +22,7 @@ async function init() {
             message.delete().catch(e => {console.error(e)});
 
             let embed = new Discord.MessageEmbed()
-                .setDescription(":green_circle: Service is online \n\nThis will be your status message, where all configured servers will be shown. It will update, when the servers are polled the next time.")
+                .setDescription(":green_square::green_square::green_square::green_square::green_square::green_square::green_square::green_square::green_square::green_square::green_square::green_square::green_square: Service is online \n\nThis will be your status message, where all configured servers will be shown. It will update, when the servers are polled the next time.")
                 .setColor("GREEN")
 
             message.channel.send(embed).then(async msg => {
@@ -44,12 +44,10 @@ async function init() {
 init();
 
 
-function refresh () {
-
-    console.log(client.guilds.cache.has('710022036252262485'))
-
-}
 
 
-module.exports = {client, refresh};
+
+module.exports = {client};
+
+
 
