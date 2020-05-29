@@ -33,7 +33,7 @@ class server {
 
         this.app.set("views", path.join(__dirname, "views"));
         this.app.set("view engine", "hbs");
-        this.app.use(express.static("public"));
+        this.app.use(express.static(__dirname + "public"));
         if (config.logging){
             this.app.use(morgan('combined', {stream: accessLogStream}))
         }
