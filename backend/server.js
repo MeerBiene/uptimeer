@@ -82,11 +82,15 @@ class server {
             
         });
 
-        this.app.get('/jsonapi', (req, res) => {
-            handle.dbgetspecificdate(req.query.server, req.query.date)
-                .then(data => { 
-                    res.jsonp({data})
-                })
+        this.app.get('/jsonapi', async (req, res) => {
+             let test = await handle.dbgetspecificdate(req.query.server, req.query.date)
+                
+             .then(data => { 
+                    console.log(data)
+                    res.json({data})
+                 })
+                 
+                 //console.log(test)
         })
 
     }
