@@ -1,17 +1,21 @@
 const express = require("express");
 const hbs = require("express-handlebars");
 const bodyParser = require("body-parser");
+var cors = require('cors')
 const path = require("path");
 const chalk = require("chalk");
 const morgan = require('morgan');
 const rfs = require('rotating-file-stream');
 const config = require('../config.json');
+const handle = require('../backend/util/db');
 
 class server {
 
     constructor(port) {
 
         this.port = port;
+
+        
 
         if (config.logging) {
             var accessLogStream = rfs.createStream('access.log', {
@@ -34,6 +38,9 @@ class server {
         this.app.set("views", path.join(__dirname, "views"));
         this.app.set("view engine", "hbs");
         this.app.use(express.static(__dirname + "public"));
+        
+
+        this.app.use(cors())
         if (config.logging){
             this.app.use(morgan('combined', {stream: accessLogStream}))
         }
@@ -74,6 +81,13 @@ class server {
             });
             
         });
+
+        this.app.get('/jsonapi', (req, res) => {
+            handle.dbgetspecificdate(req.query.server, req.query.date)
+                .then(data => { 
+                    res.jsonp({data})
+                })
+        })
 
     }
 

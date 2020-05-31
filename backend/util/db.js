@@ -39,10 +39,13 @@ async function dbpush(serverobject) {
 
 
 
-function dbget() {
+async function dbgetspecificdate(server, date) {
 
-
-
+    let finale = date.replace(" ", "%")
+    //console.log(finale)
+    let data = sql.prepare(`SELECT * FROM 'data' WHERE time LIKE '${finale}' AND server='${server}';`).all()
+    return data
+    //console.log(data)
 }
 
 
@@ -54,4 +57,4 @@ function discordupdate() {
 
 
 
-module.exports = {dbtablecreate, dbpush, dbget}
+module.exports = {dbtablecreate, dbpush, dbgetspecificdate}
