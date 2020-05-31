@@ -19,4 +19,9 @@ node_modules
 
 #assets
 public
-raw html
+about-us.html
+features.html
+pricing.html
+avatar1.jpg
+avatar2.jpg
+avatar3.jpg
