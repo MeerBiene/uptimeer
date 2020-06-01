@@ -86,7 +86,6 @@ class server {
              let test = await handle.dbgetspecificdate(req.query.server, req.query.date)
                 
              .then(data => { 
-                    console.log(data)
                     res.json({data})
                  })
                  

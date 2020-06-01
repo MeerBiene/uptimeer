@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Contact Us - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/styles.min.css" />
+  </head>
+
+  <body>
+    <nav
+      class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar"
+    >
+      <div class="container">
+        <a class="navbar-brand logo" href="#">Uptimeer</a
+        ><button
+          data-toggle="collapse"
+          class="navbar-toggler"
+          data-target="#navcol-1"
+        >
+          <span class="sr-only">Toggle navigation</span
+          ><span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" href="contact-us.html"
+                ><i class="material-icons" style="font-size: 26px;"
+                  >trending_up</i
+                ></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="page contact-us-page">
+      <section class="clean-block clean-form dark">
+        <div class="container">
+          <div class="block-heading">
+            <h2 class="text-info">Uptimes</h2>
+          </div>
+          <form>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="text-center card-title">SERVER</h4>
+                <p class="card-text" style="padding: 2px; margin: 18px;">
+                  Nullam id dolor id nibh ultricies vehicula ut id elit. SERVER
+                  DESCRIPTION dapibus ac facilisis in, egestas eget quam. Donec
+                  id elit non mi porta gravida at eget metus.
+                </p>
+                <div class="text-center">
+                  <span class="text-center"
+                    ><a onclick="myFunc()"
+                      ><i
+                        class="fa fa-stop"
+                        data-toggle="tooltip"
+                        title="<h1>Hooray</h1>"
+                        data-placement="auto"
+                        data-html="true"
+                        style="color: rgb(0, 255, 56);"
+                      ></i></a
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(255, 0, 0);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(255, 0, 0);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(255, 0, 0);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                    ><i class="fa fa-stop" style="color: rgb(0, 255, 56);"></i
+                  ></span>
+                </div>
+                <p id="inner"></p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section class="clean-block clean-form dark">
+        <div class="container"></div>
+      </section>
+      <section class="clean-block clean-form dark">
+        <div class="container"></div>
+      </section>
+    </main>
+    <footer class="page-footer dark">
+      <div class="footer-copyright">
+        <p>© 2020 Copyright Brand</p>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+    <script>
+      function myFunc() {
+        var e = document.getElementById("inner");
+        if (e.innerHTML != "") return (e.innerHTML = "");
+        e.innerHTML = `<div class="card-body"><p id="area"><canvas id="myChart" width="600" height="400"></canvas></p></div>`;
+        fetch(
+          "http://localhost:3001/jsonapi?date=Fri%May%29%2020%15%&server=another-bot"
+        ).then((response) =>
+          response.json().then((res) => {
+            var labelarray = [];
+            var dataarray = [];
+            var a = document.getElementById("area");
+            res.data.forEach((element) => {
+                var final = element.time.toString().slice(4, -40)
+                labelarray.push(final)
+                if (element.upbool == "true") {
+                    dataarray.push("1")
+                } else if (element.upbool == "false") {
+                    dataarray.push("0")
+                }
+            });
+            console.log(dataarray)
+            console.log(labelarray)
+
+
+            var ctx = document.getElementById("myChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: labelarray,
+            datasets: [
+              {
+                label: "Uptime",
+                data: dataarray,
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(153, 102, 255, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                ],
+                borderColor: [
+                  "rgba(255, 99, 132, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(255, 206, 86, 1)",
+                  "rgba(75, 192, 192, 1)",
+                  "rgba(153, 102, 255, 1)",
+                  "rgba(255, 159, 64, 1)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            legend: {
+            display: false,
+            labels: {
+                fontColor: 'rgb(255, 99, 132)'
+                }
+            },
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          },
+        });
+
+
+
+
+          })
+        );
+
+        
+      }
+    </script>
+  </body>
+</html>
