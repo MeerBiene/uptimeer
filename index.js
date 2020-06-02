@@ -9,8 +9,11 @@ const discoconfig = require("./discordconfig.json");
 const Keyv = require("keyv");
 const ping = require("minecraft-server-util");
 const debug = require('./backend/util/Logger')
-const cache = new Keyv("sqlite://backend/util/data/cache.sqlite");
-var CronJob = require("cron").CronJob;
+const cache = new Keyv('sqlite://backend/util/data/cache.sqlite');
+var CronJob = require('cron').CronJob;
+const pingg = require('ping');
+var hosts = ['46.4.64.96', 'yahoo.com'];
+
 
 if (config.discordmodule.enabled) {
   var client = require("./backend/util/discord");
@@ -40,54 +43,52 @@ async function poller() {
 // TODO: discord message update when server down
 function advancedpoller(server, props) {
   if (props.type.toLowerCase() === "web") {
-    fetch(props.IP)
-      .then(async (res) => {
-        debug("The server '" + props.IP + "' responded with the statuscode:" + res.status)
-        if (!res) throw new Error("Server doenst seem to be online.");
-        await handle.dbtablecreate();
+    const today = Date.now();
+    console.log(today)
+    handle.dbtablecreate();
+    pingg.promise.probe(props.IP)
+      .then(async res => {
+        console.log(res)
         let serverobject = {
           server: `${server}`,
-          time: `${new Date()}`,
-          upbool: `green`,
-        };
-        await handle.dbpush(serverobject);
+          time: `${today}`,
+          upbool: `${res.alive}`,
+          minresponse: `${res.min}`,
+          average: `${res.avg}`,
+          maxresponse: `${res.max}`,
+          packetloss: `${res.packetLoss}`,
+          status: ""
+        }
+    if (!props.IP.includes('http://')) {
+      var URI = `http://${props.IP}/`
+    } else if (!props.IP.includes('https://')) {
+      var URI = `http://${props.IP}/`
+    } else {
+      var URI = props.IP
+    }
+    fetch(URI)
+        .then(async res => {
+          if (res) {
+          serverobject.status = `${res.status}`
+          await handle.dbpush(serverobject);
+          } else {
+          serverobject.status = `000`
+          await handle.dbpush(serverobject);
+          }  
+        })
+        .catch(async error => {
+          debug(error)
+          serverobject.status = `000`
+          await handle.dbpush(serverobject)
+        })
+      
       })
-      .catch(async (error) => {
-        debug(error)
-        await handle.dbtablecreate();
-        let serverobject = {
-          server: `${server}`,
-          time: `${new Date()}`,
-          upbool: `red`,
-        };
-        await handle.dbpush(serverobject);
-      });
+
+    
   } else if (props.type.toLowerCase() === "mc") {
       if (!props.port) return console.error(`You specified no port for the minecraft server. Please fix your config accoringly before restarting the server.`)
     // mc server ping here.
-    ping(props.IP, props.port, async (error, res) => {
-      if (error) {
-        debug(error)
-        await handle.dbtablecreate();
-        let serverobject = {
-          server: `${server}`,
-          time: `${new Date()}`,
-          upbool: `red`,
-        };
-        await handle.dbpush(serverobject);
-      }
-
-      if (res) {
-        debug(`The minecraft server '${props.IP}' responded.`)
-        await handle.dbtablecreate();
-        let serverobject = {
-          server: `${server}`,
-          time: `${new Date()}`,
-          upbool: `green`,
-        };
-        await handle.dbpush(serverobject);
-      } 
-    });
+      console.log("mcserver")
   }
 }
 

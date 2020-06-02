@@ -10,7 +10,7 @@ async function dbtablecreate() {
     const table = sql.prepare(`SELECT count(*) FROM sqlite_master WHERE type='table' AND name='data';`).get();
     if (!table['count(*)']) {
         
-        sql.prepare("CREATE TABLE data (server TEXT, time TEXT, upbool TEXT);").run()
+        sql.prepare("CREATE TABLE data (server TEXT, time TEXT, upbool TEXT, minresponse TEXT, average TEXT, maxresponse TEXT, packetloss TEXT, status INTEGER);").run()
         sql.pragma("synchronous = 1");
         sql.pragma("journal_mode = wal");
 
@@ -20,9 +20,13 @@ async function dbtablecreate() {
 
 /**
  * @typedef {Object} serverobject
- * @property {string} server
- * @property {string} time
- * @property {string} upbool
+ * @property {string} server - ID of server that is pinged
+ * @property {string} time - time when ping happends
+ * @property {boolean} upbool - is server alive?
+ * @property {string} minresponse - minimum response time 
+ * @property {string} average - average response time
+ * @property {string} maxresponse - maximum response time
+ * @property {string} packetloss - packetloss in %
  */
 
 
@@ -33,7 +37,7 @@ async function dbtablecreate() {
 
 async function dbpush(serverobject) {
 
-    sql.prepare(`INSERT INTO 'data' (server, time, upbool) VALUES (@server, @time, @upbool)`).run(serverobject)
+    sql.prepare(`INSERT INTO 'data' (server, time, upbool, minresponse, average, maxresponse, packetloss, status) VALUES (@server, @time, @upbool, @minresponse, @average, @maxresponse, @packetloss, @status)`).run(serverobject)
 
 }
 
