@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
-    <title>Contact Us - Brand</title>
+    <title>Uptimeer</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link
       rel="stylesheet"
@@ -64,6 +64,7 @@
           <div class="block-heading">
             <h2 class="text-info">Uptimes</h2>
           </div>
+          <!-- server section -->
           <form>
             <div class="card">
               <div class="card-body">
@@ -79,8 +80,8 @@
                       ><i
                         class="fa fa-stop"
                         data-toggle="tooltip"
-                        title="<h1>Hooray</h1>"
-                        data-placement="auto"
+                        title="<h6>Fri May 25</h6><p>Click for indepth analysis</p>"
+                        data-placement="top"
                         data-html="true"
                         style="color: rgb(0, 255, 56);"
                       ></i></a
@@ -107,6 +108,7 @@
               </div>
             </div>
           </form>
+          <!-- server section -->
         </div>
       </section>
       <section class="clean-block clean-form dark">
@@ -118,7 +120,7 @@
     </main>
     <footer class="page-footer dark">
       <div class="footer-copyright">
-        <p>© 2020 Copyright Brand</p>
+        <p>© 2020 Copyright PLACEHOLDER</p>
       </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -135,9 +137,9 @@
       function myFunc() {
         var e = document.getElementById("inner");
         if (e.innerHTML != "") return (e.innerHTML = "");
-        e.innerHTML = `<div class="card-body"><p id="area"><canvas id="myChart" width="600" height="400"></canvas></p></div>`;
+        e.innerHTML = `<div class="card-body"><p id="area"><canvas id="myChart" width="500" height="200"></canvas><br><a>Codes:<br><ul><li>100: Server fully functional.</li><li>050: Server responded with error.</li><li>000: Server not responding.</li></ul><div class="text-center"><button class="btn danger">Download this Chart</button></div></a></p></div>`;
         fetch(
-          "http://localhost:3001/jsonapi?date=Fri%May%29%2020%15%&server=another-bot"
+          "http://localhost:3001/jsonapi?date=Fri%May%29%&server=another-bot"
         ).then((response) =>
           response.json().then((res) => {
             var labelarray = [];
@@ -147,9 +149,13 @@
                 var final = element.time.toString().slice(4, -40)
                 labelarray.push(final)
                 if (element.upbool == "true") {
-                    dataarray.push("1")
+                    dataarray.push("100")
                 } else if (element.upbool == "false") {
-                    dataarray.push("0")
+                    dataarray.push("000")
+                } else if (element.upbool == "green") {
+                  dataarray.push("100")
+                } else if (element.upbool == "red") {
+                  dataarray.push("000")
                 }
             });
             console.log(dataarray)
@@ -163,7 +169,7 @@
             labels: labelarray,
             datasets: [
               {
-                label: "Uptime",
+                label: "Status",
                 data: dataarray,
                 backgroundColor: [
                   "rgba(255, 99, 132, 0.2)",
@@ -186,6 +192,14 @@
             ],
           },
           options: {
+            layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 10,
+                bottom: 0
+                }
+            },
             legend: {
             display: false,
             labels: {
@@ -196,16 +210,21 @@
               yAxes: [
                 {
                   ticks: {
-                    beginAtZero: true,
+                    display: false,
                   },
                 },
               ],
+              xAxes: [{
+                ticks: {
+                    display: false //this will remove only the label
+                }
+            }],
             },
           },
         });
 
 
-
+        
 
           })
         );
