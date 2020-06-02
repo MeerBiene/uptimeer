@@ -46,7 +46,10 @@ function advancedpoller(server, props) {
     const today = Date.now();
     console.log(today)
     handle.dbtablecreate();
-    pingg.promise.probe(props.IP)
+    pingg.promise.probe(props.IP, {
+      timeout: 10,
+      extra: ['-c', '4']
+    })
       .then(async res => {
         console.log(res)
         let serverobject = {
