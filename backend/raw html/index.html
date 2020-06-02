@@ -137,32 +137,45 @@
       function myFunc() {
         var e = document.getElementById("inner");
         if (e.innerHTML != "") return (e.innerHTML = "");
-        e.innerHTML = `<div class="card-body"><p id="area"><canvas id="myChart" width="500" height="200"></canvas><br><a>Codes:<br><ul><li>100: Server fully functional.</li><li>050: Server responded with error.</li><li>000: Server not responding.</li></ul><div class="text-center"><button class="btn danger">Download this Chart</button></div></a></p></div>`;
+        e.innerHTML = `<div class="card-body"><p id="area"><canvas id="myChart" width="500" height="200"></canvas><br><canvas id="myPieChart" width="500" height="200"></canvas><br><a>Codes:<br><ul><li>100: Server fully functional.</li><li>050: Server responded with error.</li><li>000: Server not responding at all.</li></ul><div class="text-center"><button class="btn danger">Download this Chart</button></div></a></p></div>`;
         fetch(
           "http://localhost:3001/jsonapi?date=Fri%May%29%&server=another-bot"
         ).then((response) =>
           response.json().then((res) => {
+            var up = 0;
+            var down = 0;
             var labelarray = [];
             var dataarray = [];
+            var len = res.data.length
             var a = document.getElementById("area");
             res.data.forEach((element) => {
                 var final = element.time.toString().slice(4, -40)
                 labelarray.push(final)
                 if (element.upbool == "true") {
                     dataarray.push("100")
+                    up++
                 } else if (element.upbool == "false") {
                     dataarray.push("000")
+                    down++
                 } else if (element.upbool == "green") {
                   dataarray.push("100")
+                  up++
                 } else if (element.upbool == "red") {
                   dataarray.push("000")
+                  down++
                 }
             });
-            console.log(dataarray)
-            console.log(labelarray)
+            
 
-
+            var ups = parseInt(up)
+            var downs = parseInt(down)
+            var lens = parseInt(len)
+            var lenf = lens/100
+            var upp = Math.floor(ups/lenf)
+            var downp = 100-upp
+            console.log(upp, downp)
             var ctx = document.getElementById("myChart").getContext("2d");
+            var ltx = document.getElementById("myPieChart").getContext("2d");
         var myChart = new Chart(ctx, {
           type: "line",
           data: {
@@ -172,22 +185,12 @@
                 label: "Status",
                 data: dataarray,
                 backgroundColor: [
-                  "rgba(255, 99, 132, 0.2)",
-                  "rgba(54, 162, 235, 0.2)",
-                  "rgba(255, 206, 86, 0.2)",
-                  "rgba(75, 192, 192, 0.2)",
-                  "rgba(153, 102, 255, 0.2)",
-                  "rgba(255, 159, 64, 0.2)",
+                  "rgba(0, 230, 64, 1)",
                 ],
                 borderColor: [
-                  "rgba(255, 99, 132, 1)",
-                  "rgba(54, 162, 235, 1)",
-                  "rgba(255, 206, 86, 1)",
-                  "rgba(75, 192, 192, 1)",
-                  "rgba(153, 102, 255, 1)",
-                  "rgba(255, 159, 64, 1)",
+                  "rgba(0, 230, 64, 1)",
                 ],
-                borderWidth: 1,
+                borderWidth: 2,
               },
             ],
           },
@@ -223,7 +226,31 @@
           },
         });
 
+        var chart = new Chart(ltx, {
+    // The type of chart we want to create
+    type: 'pie',
 
+    // The data for our dataset
+    data: {
+        labels: ['Uptime (in %)', 'Downtime (in %)'],
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: [
+            "rgba(0, 230, 64, 1)",  
+            "rgba(240, 52, 52, 1)"
+            ],
+            data: [Math.floor(upp), Math.floor(downp)]
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+      legend: {
+            display: false,
+      },
+      responsive: true,
+    }
+});
         
 
           })
