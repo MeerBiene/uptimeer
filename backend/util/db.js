@@ -43,11 +43,27 @@ async function dbpush(serverobject) {
 
 
 
-async function dbgetspecificdate(server, date) {
+async function dbgetspecificdate(server, dateday, datemonth) {
 
-    let finale = date.replace(" ", "%")
-    //console.log(finale)
-    let data = sql.prepare(`SELECT * FROM 'data' WHERE time LIKE '${finale}' AND server='${server}';`).all()
+    let data = sql.prepare(`SELECT * FROM 'data' WHERE server='${server}';`).all()
+    let sorted = [];
+    
+    for (piece in data) {
+        if (data.hasOwnProperty(piece)) {
+            let props = data[piece]
+            console.log(props)
+
+            let today = new Date(1591130460057)
+            console.log(today)
+            console.log("month: ", today.getMonth(), "day: ", today.getDay())
+            
+            
+            //if (day !== dateday) return
+            //if (month !== datemonth) return
+            //sorted.push(piece, props)
+            console.log(sorted)
+        }
+    }
     return data
     //console.log(data)
 }

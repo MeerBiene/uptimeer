@@ -44,7 +44,9 @@ async function poller() {
 function advancedpoller(server, props) {
   if (props.type.toLowerCase() === "web") {
     const today = Date.now();
-    console.log(today)
+    const test = new Date(today)
+    console.log(test.getMonth())
+    handle.dbgetspecificdate("lobby-bot", "3", "5")
     handle.dbtablecreate();
     pingg.promise.probe(props.IP, {
       timeout: 10,
