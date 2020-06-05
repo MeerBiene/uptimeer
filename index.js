@@ -32,6 +32,8 @@ async function pollstarter() {
   job.start();
 }
 
+// ebola
+
 async function poller() {
   var topoll = config.servers;
   for (let server in topoll) {
