@@ -32,7 +32,7 @@ async function pollstarter() {
   job.start();
 }
 
-// ebola
+// corona
 
 async function poller() {
   var topoll = config.servers;
