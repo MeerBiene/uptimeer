@@ -1,7 +1,7 @@
 const chalk = require("chalk");
 const config = require("./config.json");
 const ws = require("./backend/server");
-const pollstart = require('./backend/util/pollhandler')
+var pollstart = require('./backend/util/pollhandler')
 
 
 function websocket() {
@@ -10,7 +10,7 @@ function websocket() {
     return console.error(
       `${chalk.bgRed.white(
         "[ERROR]"
-      )} Your index route is noted incorrectly. Referr to the examples below.\nExamples:\n  "/uptime" -> will serve everything at "yourdomain.com/uptime" \n  "/" -> will serve everything at "yourdomain.com/" \nPlease fix your config accordingly before starting the server again.`
+      )} Your index route is noted incorrectly. Referr to the examples below.\nExamples:\n  "/uptime" -> will serve everything at "example.com/uptime" \n  "/" -> will serve everything at "example.com/" \nPlease fix your config accordingly before starting the server again.`
     );
 
   if (config.interval < 1)

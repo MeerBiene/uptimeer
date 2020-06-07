@@ -2,7 +2,7 @@ const SQLite = require("better-sqlite3");
 const sql = new SQLite('./backend/util/data/data.sqlite');
 
 const config = require('../../config.json');
-const discoconfig = require('../../discordconfig.json');
+
 
 
 async function dbtablecreate() {
@@ -70,11 +70,7 @@ async function dbgetspecificdate(server, dateday, datemonth) {
 }
 
 
-function discordupdate() {
 
-    if (!config.discordmodule.enabled) return
-
-}
 
 
 

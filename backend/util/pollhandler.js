@@ -27,13 +27,13 @@ function pollstart() {
 
 function poller() {
     var topoll = config.servers;
-    for (let server in topoll) {
+    for (const server in topoll) {
         if (topoll.hasOwnProperty(server)) var props = topoll[server];
         advancedpoller(server, props);
     }
 };
 
-function advancedpoller(props) {
+function advancedpoller(server, props) {
 
     switch (props.type.toLowerCase()) {
         case "web":
@@ -106,4 +106,4 @@ async function mcpoller() {
     console.log("mcserver")
 };
 
-export default { pollstart };
+module.exports = pollstart 

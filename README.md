@@ -26,9 +26,15 @@ A small uptime backend server, that tracks and stores up and downtimes of your s
             "port": 25565 // port option only valid for minecraft servers
         }
     },
-    "redisconfig": {
-        "PORT": "3367",
-        "PASSWORD": "something"
+
+    // optional:
+
+    "discordmodule": {
+        "enabled": false,
+        "token": "TOKEN",
+        "prefix": "$",
+        // the guild where you want the bot to live
+        "guild": "SOMEGUILDID"
     }
 }
 
