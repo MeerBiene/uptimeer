@@ -45,20 +45,20 @@ async function poller() {
 // TODO: discord message update when server down
 function advancedpoller(server, props) {
   if (props.type.toLowerCase() === "web") {
-    const today = Date.now();
-    const test = new Date(today)
-    console.log(test.getMonth())
-    handle.dbgetspecificdate("lobby-bot", "3", "5")
     handle.dbtablecreate();
+    const today = Date.now();
+    const humantime = `${new Date(today)}`
+    handle.dbgetspecificdate("lobby-bot", "3", "5")
     pingg.promise.probe(props.IP, {
-      timeout: 10,
-      extra: ['-c', '4']
+      timeout: 30,
+      extra: ['-c', config.packetamount]
     })
       .then(async res => {
         console.log(res)
         let serverobject = {
           server: `${server}`,
           time: `${today}`,
+          humantime: `${humantime}`,
           upbool: `${res.alive}`,
           minresponse: `${res.min}`,
           average: `${res.avg}`,
