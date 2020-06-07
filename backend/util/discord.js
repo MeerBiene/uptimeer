@@ -3,9 +3,9 @@ const discoconfig = require('../../discordconfig.json')
 const chalk = require('chalk')
 const Keyv = require('keyv');
 const cache = new Keyv('sqlite://backend/util/data/cache.sqlite')
-
 const client = new Discord.Client();
 
+// TODO: discord message update when server down
 
 async function init() {
 
@@ -32,8 +32,20 @@ async function init() {
 
             })
         }
-    })
+    });
 
+
+    client.on("serverdown", (server, props) => {
+
+    });
+
+    client.on("serverup", (server, props) => {
+
+    });
+
+    client.on("ready", client => {
+
+    });
 
 
     client.login(discoconfig.TOKEN)

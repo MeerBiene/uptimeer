@@ -1,106 +1,10 @@
-const moment = require("moment");
-const timestamp = `[${moment().format("YYYY-MM-DD HH:mm:ss")}]:`;
 const chalk = require("chalk");
 const config = require("./config.json");
 const ws = require("./backend/server");
-const fetch = require("node-fetch");
-const handle = require("./backend/util/db");
-const discoconfig = require("./discordconfig.json");
-const Keyv = require("keyv");
-const ping = require("minecraft-server-util");
-const debug = require('./backend/util/Logger')
-const cache = new Keyv('sqlite://backend/util/data/cache.sqlite');
-var CronJob = require('cron').CronJob;
-const pingg = require('ping');
-var hosts = ['46.4.64.96', 'yahoo.com'];
+const pollstart = require('./backend/util/pollhandler')
 
-
-if (config.discordmodule.enabled) {
-  var client = require("./backend/util/discord");
-}
-
-async function pollstarter() {
-  var job = new CronJob(
-    `0 */${config.interval} * * * *`,
-    function () {
-      poller();
-    },
-    null,
-    true,
-    "America/Los_Angeles"
-  );
-  job.start();
-}
-
-// corona
-
-async function poller() {
-  var topoll = config.servers;
-  for (let server in topoll) {
-    if (topoll.hasOwnProperty(server)) var props = topoll[server];
-    advancedpoller(server, props);
-  }
-}
-
-// TODO: discord message update when server down
-function advancedpoller(server, props) {
-  if (props.type.toLowerCase() === "web") {
-    handle.dbtablecreate();
-    const today = Date.now();
-    const humantime = `${new Date(today)}`
-    handle.dbgetspecificdate("lobby-bot", "3", "5")
-    pingg.promise.probe(props.IP, {
-      timeout: 30,
-      extra: ['-c', config.packetamount]
-    })
-      .then(async res => {
-        console.log(res)
-        let serverobject = {
-          server: `${server}`,
-          time: `${today}`,
-          humantime: `${humantime}`,
-          upbool: `${res.alive}`,
-          minresponse: `${res.min}`,
-          average: `${res.avg}`,
-          maxresponse: `${res.max}`,
-          packetloss: `${res.packetLoss}`,
-          status: ""
-        }
-    if (!props.IP.includes('http://')) {
-      var URI = `http://${props.IP}/`
-    } else if (!props.IP.includes('https://')) {
-      var URI = `http://${props.IP}/`
-    } else {
-      var URI = props.IP
-    }
-    fetch(URI)
-        .then(async res => {
-          if (res) {
-          serverobject.status = `${res.status}`
-          await handle.dbpush(serverobject);
-          } else {
-          serverobject.status = `000`
-          await handle.dbpush(serverobject);
-          }  
-        })
-        .catch(async error => {
-          debug(error)
-          serverobject.status = `000`
-          await handle.dbpush(serverobject)
-        })
-      
-      })
-
-    
-  } else if (props.type.toLowerCase() === "mc") {
-      if (!props.port) return console.error(`You specified no port for the minecraft server. Please fix your config accoringly before restarting the server.`)
-    // mc server ping here.
-      console.log("mcserver")
-  }
-}
 
 function websocket() {
-  // TODO: figure out how to ping minecraft servers
 
   if (!config.indexroute.includes("/"))
     return console.error(
@@ -125,7 +29,7 @@ function websocket() {
 
   const Ws = new ws(config.port);
 
-  pollstarter();
+  pollstart();
 }
 
 switch (config.mode) {
